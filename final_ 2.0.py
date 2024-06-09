@@ -15,6 +15,7 @@ r = 0.065        # Радиус колеса в метрах
 settings = termios.tcgetattr(sys.stdin)
 
 def set_motors_m(pub, pub_n, left_speed, right_speed): 
+    
     speed = Twist()
     speed.linear.x = (left_speed + right_speed) * 0.35 
     speed.linear.y = 0.0; speed.linear.z = 0.0
