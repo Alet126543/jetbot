@@ -24,11 +24,11 @@ def set_motors_m(pub, pub_n, left_speed, right_speed):
     
     speed_n = Twist()
     speed_n.linear.x = left_speed * 0.7
-    speed_n.linear.y = right_speed * 0.7
+    speed_n.linear.y = 0.0
     speed_n.linear.z = 0.0
     speed_n.angular.x = 0.0
     speed_n.angular.y = 0.0 
-    speed_n.angular.z = 0.0
+    speed_n.angular.z = right_speed * 0.7
 
     pub.publish(speed)
     pub_n.publish(speed_n)
