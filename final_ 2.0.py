@@ -1,9 +1,6 @@
-#!/usr/bin/env python
 import rclpy
 
 from geometry_msgs.msg import Twist
-
-import sys, select, termios, tty
 
 import time
 
@@ -11,8 +8,6 @@ Pi = 3.14159
 Nu_max = 1.5     # Максимальное количество оборотов/сек
 L = 0.117        # Расстояние между колёсами в метрах
 r = 0.065        # Радиус колеса в метрах
-
-settings = termios.tcgetattr(sys.stdin)
 
 def set_motors_m(pub, pub_n, left_speed, right_speed): 
     
@@ -34,11 +29,9 @@ def set_motors_m(pub, pub_n, left_speed, right_speed):
     pub_n.publish(speed_n)
 
 
-def main(args=None):	
-    if args is None: 
-        args = sys.argv
+def main():	
     rclpy.init()
-    node = rclpy.create_node('Publisher-speed')	
+    node = rclpy.create_node('speed')	
     pub = node.create_publisher(Twist, 'cmd_vel', 10)
     pub_n = node.create_publisher(Twist, 'normal', 10)
     while 1:
@@ -52,6 +45,3 @@ def main(args=None):
         set_motors_m(pub, pub_n, 0, 0)
         print('Goal comleted\n')
         print('\n--- \n\n')
-
-    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
-
